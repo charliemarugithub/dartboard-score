@@ -2,6 +2,8 @@
 Program: Dart Game Score
 Author: Md. Mujtaba Asif
 Date: 1/27/2017
+Update: Game selection, choice input, game check
+Updated on: 11/24/2017
 ***************************************/
 
 #include<bits/stdc++.h>
@@ -17,22 +19,27 @@ private:
 public:
     game()
     {
-        int o;
+        char o;
         cout<<"DART GAME"<<endl<<"Created by Mujtaba Asif"<<endl<<"Date: 1/27/2017"<<endl;
         cout<<endl;
-        cout<<"Choose game\nPress 1 for 301\nPress 2 for 501\nPress 3 for 1001\nYour choice: ";
+        cout<<"Choose game\nPress 1 for 301\nPress 2 for 501\nPress 3 for 1001\nPress 4 for custom\nYour choice: ";
         cin>>o;
-        if(o==1)
+        if(o=='1')
         {
             TotalScore=301;
         }
-        else if(o==2)
+        else if(o=='2')
         {
             TotalScore=501;
         }
-        else if(o==3)
+        else if(o=='3')
         {
             TotalScore=1001;
+        }
+        else if(o=='4')
+        {
+            cout<<"Enter custom initial score: ";
+            cin>>TotalScore;
         }
         else
         {
@@ -69,7 +76,7 @@ public:
         {
             //system("cls");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0C);
-            cout<<red<<" WIN"<<endl;
+            cout<<red<<" is the WINNER"<<endl;
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
             fstream fs;
             fs.open ("test.txt", std::fstream::in | std::fstream::out | std::fstream::app);
@@ -82,7 +89,7 @@ public:
         {
             //system("cls");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0E);
-            cout<<yellow<<" WIN"<<endl;
+            cout<<yellow<<" is the WINNER"<<endl;
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
             fstream fs;
             fs.open ("test.txt", std::fstream::in | std::fstream::out | std::fstream::app);
@@ -215,12 +222,30 @@ public:
                     {
                         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0C);
                         if(i==1)
+                        {
                             cout<<"1st dart point: ";
+                            input();
+                            if(TotalScore-redScore-a<=0)
+                            {
+                                b=c=0;
+                                break;
+                            }
+                        }
                         else if(i==2)
+                        {
                             cout<<"2nd dart point: ";
+                            input();
+                            if(TotalScore-redScore-a-b<=0)
+                            {
+                                c=0;
+                                break;
+                            }
+                        }
                         else
+                        {
                             cout<<"3rd dart point: ";
-                        input();
+                            input();
+                        }
                     }
                     redScore=redScore+a+b+c;
                     if(TotalScore-redScore<0)
@@ -242,12 +267,31 @@ public:
                     {
                         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0E);
                         if(i==1)
+                        {
                             cout<<"1st dart point: ";
+                            input();
+                            if(TotalScore-yellowScore-a<=0)
+                            {
+                                b=c=0;
+                                break;
+                            }
+                        }
                         else if(i==2)
+                        {
                             cout<<"2nd dart point: ";
+                            input();
+                            if(TotalScore-yellowScore-a-b<=0)
+                            {
+                                c=0;
+                                break;
+                            }
+                        }
                         else
+                        {
                             cout<<"3rd dart point: ";
-                        input();
+                            input();
+                        }
+                        //input();
                     }
                     /*cout<<"1st dart point: ";
                     cin>>a; //1st dart;
